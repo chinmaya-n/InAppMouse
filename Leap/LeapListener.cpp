@@ -76,7 +76,6 @@ void LeapListener::onFrame(const Controller &controller)
             {
                 // Key-Tap found
                 signalKeyTap(oldX, oldY);
-                qDebug() << "KeyTap: " << x << ", "<< y;
             }
         }
     }

@@ -61,11 +61,24 @@ void LeapListener::onFrame(const Controller &controller)
     // Key-Tap
     for(int i=0; i < currentFrame.gestures(previousFrame).count(); i++)
     {
-        qDebug() << currentFrame.gestures(previousFrame).count();
         Gesture g = currentFrame.gesture(i);
-        qDebug() << g.type() << g.isValid();
-        signalKeyTap(oldX, oldY);
 
+        // Error-2: Un-Comment the following line to see another error.
+        // ----
+        // As keytap is getting continuos invalid. sending keytap directly.
+        // Mouse click will be send only to the `first click position`
+        // in real, Even though we click at any other location.
+        // But tries to click at our desired location, but click will be done
+        // at the first click position.
+
+//        signalKeyTap(oldX, oldY);
+
+        // Error-1
+        // -----
+        // Though Leap recognises Keytap. It is showing it as invalid &
+        // giving type to -1 value.
+        qDebug() << g.type() << g.isValid();
+//        qDebug() << currentFrame.gestures(previousFrame).count();
         if(g.isValid() && g.state() == Gesture::STATE_STOP)
         {
             if(g.type() == Gesture::TYPE_KEY_TAP)

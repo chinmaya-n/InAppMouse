@@ -14,6 +14,7 @@
 #include <QtCore/QDir>
 #include <QtQml/QQmlEngine>
 #include <QMouseEvent>
+#include <QDebug>
 
 class QtQuick2ApplicationViewerPrivate
 {
@@ -83,6 +84,7 @@ void QtQuick2ApplicationViewer::showExpanded()
 
 void QtQuick2ApplicationViewer::mouseClick(float x, float y)
 {
+    qDebug() << "mouse click @ " << x << "," << y;
     QGuiApplication::sendEvent(this, new QMouseEvent(QEvent::MouseButtonPress, QPointF(x, y),
                                                   Qt::LeftButton, Qt::LeftButton, Qt::NoModifier));
     QGuiApplication::sendEvent(this, new QMouseEvent(QEvent::MouseButtonRelease, QPointF(x, y),

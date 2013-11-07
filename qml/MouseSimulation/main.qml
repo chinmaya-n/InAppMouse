@@ -23,6 +23,14 @@ Rectangle {
             else
                 status.text = "Hello World"
         }
+
+        Rectangle {
+            id: borderRect
+            anchors.fill: parent
+            color: "transparent"
+            border.width: 2
+            border.color: "white"
+        }
     }
 
     Rectangle {
@@ -38,6 +46,7 @@ Rectangle {
 
         MouseArea {
             anchors.fill: parent
+            hoverEnabled: true
             onClicked: status.text = "Button 1"
         }
     }
@@ -57,6 +66,7 @@ Rectangle {
 
         MouseArea {
             anchors.fill: parent
+            hoverEnabled: true
             onClicked: status.text = "Button 2"
         }
     }
@@ -76,6 +86,7 @@ Rectangle {
 
         MouseArea {
             anchors.fill: parent
+            hoverEnabled: true
             onClicked: status.text = "Button 3"
         }
     }
@@ -95,6 +106,7 @@ Rectangle {
 
         MouseArea {
             anchors.fill: parent
+            hoverEnabled: true
             onClicked: status.text = "Button 4"
         }
     }

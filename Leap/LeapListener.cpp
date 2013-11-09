@@ -8,6 +8,7 @@ LeapListener::LeapListener(QQuickItem* item, QCursor* cursor)
     screenHeight = item->height();
 
     currentFrame = previousFrame = Frame::invalid();
+    activeWindow = true;
 }
 
 void LeapListener::movePointer(float x, float y, int64_t time)
@@ -42,41 +43,57 @@ void LeapListener::onDisconnect(const Controller &controller)
 
 void LeapListener::onFrame(const Controller &controller)
 {
-    previousFrame = currentFrame;
-    currentFrame = controller.frame();
-
-    // Move Mouse
-    if(currentFrame.fingers().count() > 0)
+    if(activeWindow)
     {
-        if(currentFrame.fingers().frontmost().isValid())
+        previousFrame = currentFrame;
+        currentFrame = controller.frame();
+
+        // Move Mouse
+        if(currentFrame.fingers().count() > 0)
         {
-            Vector finger = currentFrame.interactionBox().normalizePoint(
-                        currentFrame.fingers().frontmost().stabilizedTipPosition());
-            x = finger.x * screenWidth;
-            y = screenHeight - finger.y * screenHeight;
-            movePointer(x, y, currentFrame.timestamp());
-        }
-    }
-
-    // Key-Tap
-    for(int i=0; i < currentFrame.gestures(previousFrame).count(); i++)
-    {
-        Gesture g = currentFrame.gestures()[i];
-
-        // Error-1:
-        // Mouse click will be send only to the `first click position`
-        // in real, Even though we click at any other location.
-        // It tries to click at our desired location, but click will be done
-        // at the `first mouse click position`. It will only gets back to normal
-        // only after a manual mouse click on someother location.
-
-        if(g.isValid() && g.state() == Gesture::STATE_STOP)
-        {
-            if(g.type() == Gesture::TYPE_KEY_TAP)
+            if(currentFrame.fingers().frontmost().isValid())
             {
-                // Key-Tap found
-                signalKeyTap(oldX, oldY);
+                Vector finger = currentFrame.interactionBox().normalizePoint(
+                            currentFrame.fingers().frontmost().stabilizedTipPosition());
+                x = finger.x * screenWidth;
+                y = screenHeight - finger.y * screenHeight;
+                movePointer(x, y, currentFrame.timestamp());
             }
         }
+
+        // Key-Tap
+        for(int i=0; i < currentFrame.gestures(previousFrame).count(); i++)
+        {
+            Gesture g = currentFrame.gestures()[i];
+
+            // Error-1:
+            // Mouse click will be send only to the `first click position`
+            // in real, Even though we click at any other location.
+            // It tries to click at our desired location, but click will be done
+            // at the `first mouse click position`. It will only gets back to normal
+            // only after a manual mouse click on someother location.
+
+            if(g.isValid() && g.state() == Gesture::STATE_STOP)
+            {
+                if(g.type() == Gesture::TYPE_KEY_TAP)
+                {
+                    // Key-Tap found
+                    signalKeyTap(oldX, oldY);
+                }
+            }
+        }
+    }
+}
+
+void LeapListener::focusChanged()
+{
+    qDebug() << "Focus Changed";
+    if(QGuiApplication::focusWindow() != 0)
+    {
+        activeWindow = true;
+    }
+    else
+    {
+        activeWindow = false;
     }
 }

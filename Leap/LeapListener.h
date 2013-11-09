@@ -7,6 +7,7 @@ using namespace Leap;
 #include <QObject>
 #include <QtCore>
 #include <QQuickItem>
+#include <QtGui/QGuiApplication>
 #include <QCursor>
 #include <math.h>
 
@@ -32,9 +33,13 @@ private:
     int screenHeight;
     float x, y, oldX, oldY;
     int64_t lastMoveTime;
+    bool activeWindow;
 
 signals:
     void signalKeyTap(float, float);
+
+public slots:
+    void focusChanged();
 };
 
 #endif // LEAPLISTENER_H

@@ -25,6 +25,7 @@ int main(int argc, char *argv[])
 
     // Connect Signals-Slots
     QObject::connect(&listener, SIGNAL(signalKeyTap(float, float)), &viewer, SLOT(mouseClick(float, float)));
+    QObject::connect(&app, SIGNAL(focusWindowChanged(QWindow *)), &listener, SLOT(focusChanged()));
 
     return app.exec();
 }

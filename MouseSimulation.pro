@@ -15,6 +15,11 @@ QML_IMPORT_PATH =
 SOURCES += main.cpp \
     Leap/LeapListener.cpp
 
+# QT Extra modules
+#QT += multimedia \
+#    sql \
+#    widgets
+
 # Installation path
 # target.path =
 

@@ -1,5 +1,4 @@
 import QtQuick 2.0
-import QtQuick.Dialogs 1.0
 
 Rectangle {
     width: 500
@@ -110,35 +109,5 @@ Rectangle {
             hoverEnabled: true
             onClicked: status.text = "Button 4"
         }
-    }
-
-    Rectangle {
-        id: askFolder
-        width: 100
-        height: 50
-        color: "lightblue"
-        anchors.bottom: parent.bottom
-        anchors.horizontalCenter: parent.horizontalCenter
-
-        Text {
-            id: askFolderText
-            anchors.centerIn: parent
-            text: "Get Folder"
-        }
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                folderDialog.visible = true
-            }
-        }
-    }
-
-    FileDialog {
-        id: folderDialog
-        title: "Select Your Folder"
-        selectFolder: true
-        onAccepted: status.text = "you chose: " + folderDialog.folder
-        onRejected: status.text = "closed dialog without accepting anything"
     }
 }

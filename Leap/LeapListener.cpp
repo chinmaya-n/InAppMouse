@@ -36,11 +36,6 @@ void LeapListener::onConnect(const Controller &controller)
     controller.enableGesture(Gesture::TYPE_KEY_TAP);
 }
 
-void LeapListener::onDisconnect(const Controller &controller)
-{
-    qDebug() << controller.isGestureEnabled(Gesture::TYPE_KEY_TAP);
-}
-
 void LeapListener::onFrame(const Controller &controller)
 {
     if(activeWindow)

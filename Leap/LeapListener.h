@@ -20,9 +20,6 @@ public:
     void movePointer(float x, float y, int64_t time);
     virtual void onConnect(const Controller &);
     virtual void onFrame(const Controller &);
-//    virtual void onFocusGained(const Controller &);
-//    virtual void onFocusLost(const Controller &);
-    virtual void onDisconnect(const Controller &);
 
 private:
     Frame previousFrame;

@@ -48,6 +48,26 @@ Rectangle {
             anchors.fill: parent
             hoverEnabled: true
             onClicked: status.text = "Button 1"
+            onEntered: parent.color = "white"
+            onExited: parent.color = "lightblue"
+        }
+    }
+
+    MouseArea {
+        id: button1a
+        width: 100
+        height: 50
+        hoverEnabled: true
+        anchors.top: button1.bottom
+        anchors.left: parent.left
+        onClicked: status.text = "clicked button-1a"
+        onEntered: status.text = "entered button-1a"
+        onExited: status.text = "exited button-1a"
+
+        Rectangle {
+            anchors.fill: parent
+            border.color: "white"
+            border.width: 1
         }
     }
 
@@ -68,6 +88,8 @@ Rectangle {
             anchors.fill: parent
             hoverEnabled: true
             onClicked: status.text = "Button 2"
+            onEntered: parent.color = "white"
+            onExited: parent.color = "lightblue"
         }
     }
 
@@ -88,6 +110,8 @@ Rectangle {
             anchors.fill: parent
             hoverEnabled: true
             onClicked: status.text = "Button 3"
+            onEntered: parent.color = "white"
+            onExited: parent.color = "lightblue"
         }
     }
 
@@ -108,6 +132,8 @@ Rectangle {
             anchors.fill: parent
             hoverEnabled: true
             onClicked: status.text = "Button 4"
+            onEntered: parent.color = "white"
+            onExited: parent.color = "lightblue"
         }
     }
 }

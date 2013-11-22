@@ -13,7 +13,8 @@ QML_IMPORT_PATH =
 
 # The .cpp file which was generated for your project. Feel free to hack it.
 SOURCES += main.cpp \
-    Leap/LeapListener.cpp
+    Leap/LeapListener.cpp \
+    ButtonMouse.cpp
 
 # QT Extra modules
 #QT += multimedia \
@@ -36,4 +37,5 @@ INCLUDEPATH += $$PWD/Leap
 DEPENDPATH += $$PWD/Leap
 
 HEADERS += \
-    Leap/LeapListener.h
+    Leap/LeapListener.h \
+    ButtonMouse.h

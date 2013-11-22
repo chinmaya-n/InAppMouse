@@ -31,7 +31,9 @@ private:
     class QtQuick2ApplicationViewerPrivate *d;
 
 public slots:
-    void mouseClick(float x, float y);
+//    void mouseClick(float x, float y);
+//    QVariant x1, QVariant y1
+    void mouseClick(QVariant x1, QVariant y1);
 };
 
 #endif // QTQUICK2APPLICATIONVIEWER_H

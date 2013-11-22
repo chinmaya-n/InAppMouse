@@ -82,11 +82,24 @@ void QtQuick2ApplicationViewer::showExpanded()
 #endif
 }
 
-void QtQuick2ApplicationViewer::mouseClick(float x, float y)
+//void QtQuick2ApplicationViewer::mouseClick(float x, float y)
+void QtQuick2ApplicationViewer::mouseClick(QVariant x1, QVariant y1)
 {
-    qDebug() << "leap click @ " << x << "," << y;
-    QGuiApplication::sendEvent(this, new QMouseEvent(QEvent::MouseButtonPress, QPointF(x, y),
-                                                  Qt::LeftButton, Qt::LeftButton, Qt::NoModifier));
-    QGuiApplication::sendEvent(this, new QMouseEvent(QEvent::MouseButtonRelease, QPointF(x, y),
-                                                  Qt::LeftButton, Qt::LeftButton, Qt::NoModifier));
+    float x = x1.toFloat();
+    float y = y1.toFloat();
+    qDebug() << "click @ " << x << "," << y;
+    this->cursor().setPos(x, y);
+
+    QMouseEvent pressEvent(QEvent::MouseButtonPress, QPointF(x, y),
+                           Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    QMouseEvent releaseEvent(QEvent::MouseButtonRelease, QPointF(x, y),
+                           Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+
+//    qDebug() << pressEvent.globalPos().x() << "; " << pressEvent.globalPos().y();
+//    qDebug() << pressEvent.windowPos().x() << "; " << pressEvent.windowPos().y();
+//    qDebug() << pressEvent.screenPos().x() << "; " << pressEvent.screenPos().y();
+//    qDebug() << pressEvent.localPos().x() << "; " << pressEvent.localPos().y();
+
+    QGuiApplication::sendEvent(this, &pressEvent);
+    QGuiApplication::sendEvent(this, &releaseEvent);   
 }
